@@ -35,7 +35,7 @@ class simElecRing(threading.Thread):
     self.frame = Frame(self.master,height=400, width=400)
     self.frame.grid_propagate(0)
     self.frame.grid(columnspan=6,sticky=N+E+W+S)
-    self.msgOut = Label(self.frame, text="test\n test")
+    self.msgOut = Label(self.frame, text="Physics 208 Simulation\nPapa Beye\nProffessor Duraisamy")
     self.msgOut.pack(fill=BOTH)
     self.msg = ""
     self.numberOFchargesInRing = 2
@@ -170,17 +170,20 @@ class simElecRing(threading.Thread):
       try:
         if self.simThread.is_alive():
           self.simThread._stop()
+        raise KeyboardInterrupt
       finally:
         self.master.destroy()
         exit(0)
 
       
 
-
-root = Tk()
-obj = simElecRing(root)
-root.protocol("WM_DELETE_WINDOW", obj.killcanvas)
-root.mainloop()
+try:
+  root = Tk()
+  obj = simElecRing(root)
+  root.protocol("WM_DELETE_WINDOW", obj.killcanvas)
+  root.mainloop()
+except KeyboardInterrupt:
+  exit(0)
 
 
 
