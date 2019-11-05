@@ -1,5 +1,5 @@
 from vpython import *
-
+import time
 
 class simRing:
     def __init__(self):
@@ -18,7 +18,6 @@ class simRing:
         self.scRun = False
         self.d_theta = self.tpi/100
         self.initInputs()
-        self.Earrow=arrow(pos=vector(0,0,0),axis=vector(1,0,0),color=color.purple)
     
     def simulate(self):
         if len(self.scene.objects):
@@ -74,6 +73,8 @@ class simRing:
         self.Escale_Label = wtext(pos=self.scene.caption_anchor,text="Enter E Scale for Q")
         self.scene.append_to_caption(' ') 
         self.Escale_Entry = winput(pos=self.scene.caption_anchor,bind=self.setEscale)
+        self.scene.append_to_caption(' ') 
+        self.b = button( bind=self.simulate, text='Submit!' )
 
                 
     def createArrow(self,d):
@@ -121,6 +122,7 @@ class simRing:
     
         
 ob = simRing()
+ob
     
     
 
