@@ -142,7 +142,7 @@ class simElecRing(threading.Thread):
       a.clear_trail()
     if self.ptcharge.pos == vector(0,0,0):
         self.ElectricField = vector(0,0,0)
-    Earrow=arrow(pos=self.ptcharge.pos,axis=(self.Scale/mag(self.ElectricField))*self.ElectricField,color=color.purple, shaftwidth=float(self.ring_Radius/10))
+    self.Earrow=arrow(pos=self.ptcharge.pos,axis=(self.Scale/mag(self.ElectricField))*self.ElectricField,color=color.purple, shaftwidth=float(self.ring_Radius/10))
     self.msg += "\n" + "The Electric Field at Point Charge is " + str(mag(self.ElectricField))
     self.update_msg()
     self.scRun = True
