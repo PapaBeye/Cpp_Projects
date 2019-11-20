@@ -20,6 +20,9 @@ class simRing:
         self.initInputs()
     
     def simulate(self):
+        print("time up")
+        print(str(self.Q_ring_Entry.number))
+        time.sleep(3000)
         if len(self.scene.objects):
             for ob in self.scene.objects:
                 ob.visible = False
@@ -52,7 +55,6 @@ class simRing:
         if self.ptcharge.pos == vector(0,0,0):
             self.ElectricField = vector(0,0,0)
         self.Earrow=arrow(pos=self.ptcharge.pos,axis=(self.Scale/mag(self.ElectricField))*self.ElectricField,color=color.purple, shaftwidth=float(self.ring_Radius/10))
-        self.scRun = True
 
     def initInputs(self):
         wtext(pos=self.scene.caption_anchor,text="Enter Charge Q for Ring")
@@ -88,6 +90,7 @@ class simRing:
             try:
                 ptsQ = str(S.text)
                 self.ptChargePOS = vector(float(ptsQ.split(",")[0]), float(ptsQ.split(",")[1]), float(ptsQ.split(",")[2]))
+                print(self.ptChargePOS)
             except Exception as e:
                 print(e)
         else:
@@ -119,10 +122,9 @@ class simRing:
         else:
             self.ring_Radius = 0.0
 
-    
-        
+
 ob = simRing()
-ob
+
     
     
 
