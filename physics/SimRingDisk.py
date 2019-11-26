@@ -1,4 +1,6 @@
 from vpython import *
+from vpython.no_notebook import __HTTP_PORT
+from threading import Thread
 import time
 
 class simRing:
@@ -22,7 +24,6 @@ class simRing:
     def simulate(self):
         print("time up")
         print(str(self.Q_ring_Entry.number))
-        time.sleep(3000)
         if len(self.scene.objects):
             for ob in self.scene.objects:
                 ob.visible = False
@@ -39,9 +40,10 @@ class simRing:
         self.ptcharge = sphere(pos=self.ptChargePOS, radius=self.ring_Radius/10, color=color.blue)
         for pts in self.ptsList:
             d = self.ptcharge.pos - pts.pos
-            EforEach = self.K*self.deltaQ*norm(d)/mag(d)**2
-            self.Elist = self.Elist + [{1:pts.pos,2:(self.Scale/mag(EforEach))*EforEach}]
-            self.ElectricField = self.ElectricField + EforEach
+            if (d != vector(0,0,0,)):
+                EforEach = self.K*self.deltaQ*norm(d)/(mag(d)**2)
+                self.Elist = self.Elist + [{1:pts.pos,2:(self.Scale/mag(EforEach))*EforEach}]
+                self.ElectricField = self.ElectricField + EforEach
         i = 0
         pArrows = []
         for E in self.Elist:
@@ -86,6 +88,7 @@ class simRing:
             self.Q_ring = S.number
             print(self.Q_ring)
     def setPtchar(self, S):
+        print("Debug {}".format(S.text))
         if S.text:
             try:
                 ptsQ = str(S.text)
@@ -123,7 +126,8 @@ class simRing:
             self.ring_Radius = 0.0
 
 
-ob = simRing()
+t = Thread(target=simRing)
+t.start()
 
     
     
